@@ -1,7 +1,7 @@
-# JSchMon
+# SshReplay
 
-JSchMon means Java Secure channel monitoring and has been made as a project for a GUI classes during my Master in Computer Science.
-It's based on JSch and has been thought to monitor easier a SSH session.
+SshReplay has been made as a project for a GUI class during my Master in Computer Science.
+It has been thought to monitor a SSH session.
 
 ## Features
 

@@ -1,1 +1,5 @@
-/bin/
+*
+
+!static/
+!src/
+!README.md

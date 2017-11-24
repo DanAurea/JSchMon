@@ -14,12 +14,17 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class LoginController {
-
+	
+	@FXML
+	private StackPane mainContainer;
+	
     @FXML
     private Button loginButton;
     
@@ -39,11 +44,14 @@ public class LoginController {
 
             @Override
             protected void interpolate(double frac) {
-                Color vColor = new Color(0.2, 0.5, 0.8, frac);
+                Color vColor = new Color(0.18, 0.45, 0.80, frac);
                 loginButton.setBackground(new Background(new BackgroundFill(vColor, new CornerRadii(3.0), Insets.EMPTY)));
             }
     	};
     	animation.play();
+    	
+    	// Retrieve primaryStage for switching on another scene
+    	Stage primaryStage = (Stage) mainContainer.getScene().getWindow();
     	
     	System.out.println("Login");
     }

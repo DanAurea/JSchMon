@@ -1,5 +1,7 @@
-*
 
-!static/
-!src/
+
+!.gitignore
+
+!src/*
+!./static/*
 !README.md

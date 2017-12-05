@@ -21,6 +21,7 @@ public class Main extends Application {
         this.primaryStage.setMinHeight(640);
         this.primaryStage.setWidth(480);
         this.primaryStage.setHeight(640);
+        this.primaryStage.centerOnScreen();
         this.primaryStage.setTitle("Login");
 
         initloginLayout();

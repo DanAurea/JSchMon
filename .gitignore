@@ -1,4 +1,7 @@
-
+.classpath
+.project
+bin/
+build.fxbuild
 
 !.gitignore
 

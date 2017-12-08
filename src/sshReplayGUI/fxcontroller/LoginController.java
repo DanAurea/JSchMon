@@ -11,6 +11,8 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -18,6 +20,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import sshReplayCore.SshContext;
 import sshReplayCore.SshSession;
 import sshReplayCore.SshUtil;
 
@@ -34,6 +37,13 @@ public class LoginController {
     
     @FXML
     private TextField passwordField;
+    	
+    @FXML
+    void handleKey(KeyEvent event) {
+		if (event.getCode() == KeyCode.ENTER)  {
+			login(null);
+		}
+    }
     
     @FXML
     void login(ActionEvent event) {
@@ -52,14 +62,23 @@ public class LoginController {
     	animation.play();
     	
     	Stage stage 		= SshUtil.getStage(rootLayout);
+    	
     	SshSession session 	= null;
     	String errorMessage = "";
     	String login		= loginField.getText();			
     	String password		= passwordField.getText();
     	
-    	session 		= new SshSession(login, password);
-    	errorMessage 	= session.getErrorMessage();
+    	// Create a new session with users credentials
+    	try {
+			SshContext.getInstance().setSession(new SshSession(login, password));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+    	session 		= SshContext.getInstance().getSession();
     	
+    	// Display error message about creation of session if required
+    	errorMessage 	= session.getErrorMessage();
     	if(!errorMessage.equals("")) {
     		SshUtil.alertError(errorMessage);
     	}
@@ -72,30 +91,6 @@ public class LoginController {
     			stage.setHeight(800);
     			stage.centerOnScreen();
     			stage.setTitle("Session");
-    			
-//              try {
-//            	session.allocateDefaultPTY();
-//
-//                final Shell shell = session.startShell();
-//
-//                new StreamCopier(shell.getInputStream(), System.out, LoggerFactory.DEFAULT)
-//                        .bufSize(shell.getLocalMaxPacketSize())
-//                        .spawn("stdout");
-//
-//                new StreamCopier(shell.getErrorStream(), System.err, LoggerFactory.DEFAULT)
-//                        .bufSize(shell.getLocalMaxPacketSize())
-//                        .spawn("stderr");
-//
-//                // Now make System.in act as stdin. To exit, hit Ctrl+D (since that results in an EOF on System.in)
-//                // This is kinda messy because java only allows console input after you hit return
-//                // But this is just an example... a GUI app could implement a proper PTY
-//                new StreamCopier(System.in, shell.getOutputStream(), LoggerFactory.DEFAULT)
-//                        .bufSize(shell.getRemoteMaxPacketSize())
-//                        .copy();
-//            }finally{
-//            	session.close();
-//            }
-    			
     		} catch (NullPointerException e) {
     			// TODO Auto-generated catch block
     			e.printStackTrace();
@@ -103,9 +98,7 @@ public class LoginController {
     			// TODO Auto-generated catch block
     			e.printStackTrace();
     		}
-    	}else
-    		SshUtil.alertError("Authentication failed !");
-    	
+    	}
     }
 
 }

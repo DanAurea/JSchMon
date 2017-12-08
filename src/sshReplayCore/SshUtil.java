@@ -53,6 +53,7 @@ public class SshUtil {
 	 */
 	public static void alertError(String errorMessage) {
 		Alert alert = new Alert(AlertType.ERROR);
+		
     	alert.setTitle("Error Dialog");
     	alert.setHeaderText("Something has gone wrong !");
     	alert.setContentText(errorMessage);

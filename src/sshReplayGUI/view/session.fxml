@@ -11,23 +11,23 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="697.0" prefWidth="1115.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="rootLayout" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="697.0" prefWidth="1115.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sshReplayGUI.fxcontroller.SessionController">
    <top>
       <MenuBar prefHeight="20.0" prefWidth="1076.0" stylesheets="@../../../static/main.css" BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem fx:id="closeButton" mnemonicParsing="false" onAction="#close" text="Close" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem fx:id="clearButton" mnemonicParsing="false" onAction="#clear" text="Clear commands" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem fx:id="aboutButton" mnemonicParsing="false" onAction="#about" text="About" />
             </items>
           </Menu>
         </menus>
@@ -38,15 +38,15 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" styleClass="background" stylesheets="@../../../static/main.css">
                <children>
-                  <ListView layoutY="96.0" prefHeight="570.0" prefWidth="186.0" stylesheets="@../../../static/main.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="96.0" />
+                  <ListView fx:id="historyView" layoutY="96.0" onMouseClicked="#selectCommand" prefHeight="570.0" prefWidth="186.0" stylesheets="@../../../static/main.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="96.0" />
                   <TitledPane animated="false" collapsible="false" expanded="false" layoutY="71.0" maxHeight="119.0" minHeight="0.0" prefHeight="24.0" prefWidth="179.0" stylesheets="@../../../static/main.css" text="Command history" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="71.0" />
-                  <TextField accessibleRole="CHECK_MENU_ITEM" layoutX="9.0" layoutY="25.0" prefHeight="27.0" prefWidth="192.0" promptText="Search a command..." styleClass="textFields" stylesheets="@../../../static/main.css" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="25.0" />
+                  <TextField fx:id="searchBar" accessibleRole="CHECK_MENU_ITEM" layoutX="9.0" layoutY="25.0" onKeyPressed="#handleSearch" prefHeight="27.0" prefWidth="192.0" promptText="Search a command..." styleClass="textFields" stylesheets="@../../../static/main.css" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="25.0" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="582.0" prefWidth="563.0" styleClass="background" stylesheets="@../../../static/main.css">
                <children>
-                  <TextArea editable="false" layoutX="20.0" layoutY="24.0" prefHeight="581.0" prefWidth="880.0" stylesheets="@../../../static/main.css" AnchorPane.bottomAnchor="61.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="24.0" />
-                  <TextField layoutX="21.0" layoutY="626.0" prefHeight="26.0" prefWidth="834.0" promptText="Type a command..." styleClass="textFields" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="19.0" />
+                  <TextArea fx:id="displayArea" editable="false" layoutX="20.0" layoutY="24.0" prefHeight="581.0" prefWidth="880.0" stylesheets="@../../../static/main.css" AnchorPane.bottomAnchor="61.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="24.0" />
+                  <TextField fx:id="commandInput" layoutX="21.0" layoutY="626.0" onKeyPressed="#handleCommand" prefHeight="26.0" prefWidth="834.0" promptText="Type a command..." styleClass="textFields" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="19.0" />
                </children>
             </AnchorPane>
         </items>

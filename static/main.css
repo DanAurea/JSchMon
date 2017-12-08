@@ -59,6 +59,7 @@
 .text-area {
 	-fx-background-color: transparent;
     text-area-background:  #1e2530;
+    -fx-text-fill: #FFFFFF;
 }
 
 .text-area .content {

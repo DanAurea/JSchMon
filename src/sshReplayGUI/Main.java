@@ -5,7 +5,7 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import sshReplayCore.SshContext;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 
@@ -25,6 +25,7 @@ public class Main extends Application {
         this.primaryStage.setTitle("Login");
 
         initloginLayout();
+        SshContext.getInstance();
     }
 
     public void initloginLayout() {
@@ -32,7 +33,7 @@ public class Main extends Application {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("view/login.fxml")); 
             loginLayout = loader.load();
-
+            
             // Show the scene containing the root layout.
             Scene scene = new Scene(loginLayout);
             primaryStage.setScene(scene);
